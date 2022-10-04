@@ -8,18 +8,16 @@ const todoTasks = [];
 const TodoForm = (props) => {
   const [todo, setTodo] = useState("");
 
-  const todoInputRref = useRef();
+  const todoInputRef = useRef();
 
   const todoChangeHandler = (event) => {
-    setTodo(event.target.value);
+    console.log(todoInputRef.current.value);
+    setTodo(todoInputRef.current.value);
   };
 
   const formSubmitHandler = (event) => {
-    // using refs to read value of the input instead of useState hook
     event.preventDefault();
-    todoTasks.push(todoInputRref.current.value);
-    props.onSaveTodos(todoTasks);
-    // Add two way binding to clear form input upon submission
+    console.log(todo);
     setTodo("");
   };
 
@@ -31,7 +29,7 @@ const TodoForm = (props) => {
           type="text"
           placeholder="Enter a task"
           value={todo}
-          ref={todoInputRref}
+          ref={todoInputRef}
         />
         <Button type="submit">Add Task</Button>
       </form>

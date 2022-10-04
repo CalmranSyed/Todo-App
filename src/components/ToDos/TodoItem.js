@@ -5,7 +5,7 @@ import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
   return (
-    <Card className={classes["todo-list_item"]}>
+    <Card className={`${classes["todo-task"]}`}>
       <span>{props.title}</span>
       <div className={classes["actions-wrap"]}>
         <Button>Edit</Button>
