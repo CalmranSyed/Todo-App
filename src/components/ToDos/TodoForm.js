@@ -10,15 +10,23 @@ const TodoForm = (props) => {
 
   const todoInputRef = useRef();
 
-  const todoChangeHandler = (event) => {
-    console.log(todoInputRef.current.value);
+  const todoChangeHandler = () => {
     setTodo(todoInputRef.current.value);
   };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(todo);
-    setTodo("");
+
+    // Check for empty inputs
+    if (todoInputRef.current.value !== "") {
+      const todoTask = { title: todo };
+
+      props.onSaveTodoTask(todoTask);
+      // two way binding to clear thr input field
+      setTodo("");
+      return;
+    }
+    console.log("invalid input");
   };
 
   return (

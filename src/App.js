@@ -3,13 +3,24 @@ import "./App.css";
 import TodoForm from "./components/ToDos/TodoForm";
 import TodoList from "./components/ToDos/TodoList";
 
+const dummyTodos = [{ title: "Play Valorant" }, { title: "Play The Witcher" }];
+
 function App() {
-  const dummyTodos = [
-    { title: "Make a todo app" },
-    { title: "Make a login app" },
-    { title: "Play Valorant" },
-    { title: "Play The Witcher" },
-  ];
+  // callback for receiving state/data from child component (Lifting state up)
+  const [todoTasks, setTodoTasks] = useState(dummyTodos);
+
+  const todoSaveHandler = (enteredTodoTask) => {
+    const todoTask = {
+      ...enteredTodoTask,
+      id: Math.random().toString(),
+    };
+
+    setTodoTasks((prevTodos) => {
+      return [todoTask, ...prevTodos];
+    });
+
+    console.log(todoTasks);
+  };
 
   return (
     <React.Fragment>
@@ -17,8 +28,8 @@ function App() {
         <h3>ToDo List</h3>
       </header>
       <main className="container">
-        <TodoForm />
-        <TodoList todos={dummyTodos} />
+        <TodoForm onSaveTodoTask={todoSaveHandler} />
+        <TodoList todos={todoTasks} />
       </main>
     </React.Fragment>
   );
