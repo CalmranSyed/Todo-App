@@ -3,10 +3,9 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./TodoForm.module.css";
 
-const todoTasks = [];
-
 const TodoForm = (props) => {
   const [todo, setTodo] = useState("");
+  const [isValid, setIsValid] = useState(false);
 
   const todoInputRef = useRef();
 
@@ -18,15 +17,14 @@ const TodoForm = (props) => {
     event.preventDefault();
 
     // Check for empty inputs
-    if (todoInputRef.current.value !== "") {
-      const todoTask = { title: todo };
-
-      props.onSaveTodoTask(todoTask);
+    if (todoInputRef.current.value.trim().length !== 0) {
+      props.onSaveTodoTask(todoInputRef.current.value);
       // two way binding to clear thr input field
       setTodo("");
       return;
     }
     console.log("invalid input");
+    setTodo("");
   };
 
   return (

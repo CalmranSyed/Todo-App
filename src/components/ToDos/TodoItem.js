@@ -1,15 +1,64 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
+  // state for checking if task if being updated
+  const [editMode, setEditMode] = useState(false);
+  const [updatedTodo, setUpdatedTodo] = useState(props.title);
+  const todoEditRef = useRef();
+
+  // handler for edit button
+  const editTodoHandler = () => {
+    if (editMode === false) {
+      setEditMode(true);
+
+      return;
+    }
+
+    setEditMode(false);
+  };
+
+  // handler for delete button
+  const deleteTaskHandler = () => {
+    props.onDelete(props.id);
+  };
+
+  const todoTitleChangeHandler = (event) => {
+    setUpdatedTodo(event.target.value);
+  };
+
+  let titleContent = <span>{updatedTodo ? updatedTodo : props.title}</span>;
+
+  if (editMode) {
+    titleContent = (
+      <input
+        type="text"
+        value={updatedTodo}
+        onChange={todoTitleChangeHandler}
+        ref={todoEditRef}
+      />
+    );
+  }
+
+  // ref for input field for updating task
+  const updateTodoRef = useRef();
+
   return (
     <Card className={`${classes["todo-task"]}`}>
-      <span>{props.title}</span>
+      {titleContent}
       <div className={classes["actions-wrap"]}>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
+        <Button
+          className="edit-task"
+          onClick={editTodoHandler}
+          disabled={editMode}
+        >
+          Edit
+        </Button>
+        <Button className="delete-task" onClick={deleteTaskHandler}>
+          Delete
+        </Button>
       </div>
     </Card>
   );
