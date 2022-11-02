@@ -5,8 +5,18 @@
   gap: 20px;
 }
 
+.actions-wrap button {
+  padding: 12px 24px;
+}
+
 .todo-task {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.edit-input {
+  height: 30px;
+  padding: 0 15px;
+  font-size: 16px;
 }

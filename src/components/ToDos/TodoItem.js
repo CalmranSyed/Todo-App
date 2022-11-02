@@ -13,10 +13,9 @@ const TodoItem = (props) => {
   const editTodoHandler = () => {
     if (editMode === false) {
       setEditMode(true);
-
       return;
     }
-
+    console.log(localStorage.getItem("savedTodos"));
     setEditMode(false);
   };
 
@@ -26,14 +25,15 @@ const TodoItem = (props) => {
   };
 
   const todoTitleChangeHandler = (event) => {
-    setUpdatedTodo(event.target.value);
+    setUpdatedTodo(todoEditRef.current.value);
   };
 
-  let titleContent = <span>{updatedTodo ? updatedTodo : props.title}</span>;
+  let titleContent = <span>{updatedTodo}</span>;
 
   if (editMode) {
     titleContent = (
       <input
+        className={classes["edit-input"]}
         type="text"
         value={updatedTodo}
         onChange={todoTitleChangeHandler}
@@ -43,20 +43,19 @@ const TodoItem = (props) => {
   }
 
   // ref for input field for updating task
-  const updateTodoRef = useRef();
 
   return (
     <Card className={`${classes["todo-task"]}`}>
       {titleContent}
       <div className={classes["actions-wrap"]}>
         <Button
-          className="edit-task"
+          className={classes["edit-task"]}
           onClick={editTodoHandler}
           disabled={editMode}
         >
           Edit
         </Button>
-        <Button className="delete-task" onClick={deleteTaskHandler}>
+        <Button className={classes["delete-task"]} onClick={deleteTaskHandler}>
           Delete
         </Button>
       </div>

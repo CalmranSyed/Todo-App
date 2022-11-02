@@ -9,6 +9,9 @@
 
 .form-wrap form input {
   flex-basis: 70%;
+  line-height: 30px;
+  padding: 0 15px;
+  font-size: 16px;
 }
 
 .form-wrap form input:focus {
