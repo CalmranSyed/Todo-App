@@ -12,6 +12,7 @@ const TodoList = (props) => {
           key={task.id}
           title={task.title}
           id={task.id}
+          onUpdate={props.onUpdateTodoTask}
         />
       ))}
     </div>

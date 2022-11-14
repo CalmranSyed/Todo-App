@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  flex-basis: 20%;
 }
 
 .actions-wrap button {
@@ -13,6 +14,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.edit-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .edit-input {

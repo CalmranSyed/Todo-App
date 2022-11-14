@@ -45,6 +45,9 @@ const TodoForm = (props) => {
           <Button type="submit">Add Task</Button>
         </form>
       </Card>
+      {setIsValid === false && (
+        <p className={classes["error-message"]}>Please add a task</p>
+      )}
     </Fragment>
   );
 };

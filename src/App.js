@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TodoForm from "./components/ToDos/TodoForm";
 import TodoList from "./components/ToDos/TodoList";
 
-// const dummyTodos = [
-//   { title: "Play Valorant", id: 1 },
-//   { title: "Play The Witcher", id: 2 },
-// ];
-
 function App() {
   // callback for receiving state/data from child component (Lifting state up)
   const [todoTasks, setTodoTasks] = useState([]);
+
+  // persist data in local storage
+  localStorage.setItem("tasks", JSON.stringify(todoTasks));
+  const tasks = localStorage.getItem("tasks");
 
   const todoSaveHandler = (enteredTodoTask) => {
     setTodoTasks((prevTodos) => {
@@ -21,6 +20,8 @@ function App() {
       });
       return updatedTodoTasks;
     });
+
+    console.log(todoTasks);
   };
 
   const todoDeleteHandler = (todoID) => {
@@ -28,6 +29,21 @@ function App() {
       const updatedTodoTasks = prevTodos.filter((todo) => todo.id !== todoID);
       return updatedTodoTasks;
     });
+    console.log(todoTasks);
+  };
+
+  const todoUpdateHandler = (title, id) => {
+    setTodoTasks((prevTodos) => {
+      const updatedTodoTasks = prevTodos.filter((todo) => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+
+        return todo;
+      });
+      return updatedTodoTasks;
+    });
+    console.log(todoTasks);
   };
 
   let mainContent = (
@@ -38,7 +54,11 @@ function App() {
 
   if (todoTasks.length > 0) {
     mainContent = (
-      <TodoList todos={todoTasks} onDeleteTodoTask={todoDeleteHandler} />
+      <TodoList
+        todos={todoTasks}
+        onDeleteTodoTask={todoDeleteHandler}
+        onUpdateTodoTask={todoUpdateHandler}
+      />
     );
   }
 

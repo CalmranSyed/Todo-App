@@ -15,7 +15,6 @@ const TodoItem = (props) => {
       setEditMode(true);
       return;
     }
-    console.log(localStorage.getItem("savedTodos"));
     setEditMode(false);
   };
 
@@ -26,6 +25,11 @@ const TodoItem = (props) => {
 
   const todoTitleChangeHandler = (event) => {
     setUpdatedTodo(todoEditRef.current.value);
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    props.onUpdate(updatedTodo, props.id);
   };
 
   let titleContent = <span>{updatedTodo}</span>;
@@ -46,19 +50,25 @@ const TodoItem = (props) => {
 
   return (
     <Card className={`${classes["todo-task"]}`}>
-      {titleContent}
-      <div className={classes["actions-wrap"]}>
-        <Button
-          className={classes["edit-task"]}
-          onClick={editTodoHandler}
-          disabled={editMode}
-        >
-          Edit
-        </Button>
-        <Button className={classes["delete-task"]} onClick={deleteTaskHandler}>
-          Delete
-        </Button>
-      </div>
+      <form className={`${classes["edit-form"]}`} onSubmit={formSubmitHandler}>
+        <div className={classes["task-content"]}>{titleContent}</div>
+        <div className={classes["actions-wrap"]}>
+          <Button
+            className={classes["edit-task"]}
+            onClick={editTodoHandler}
+            disabled={editMode}
+            type="submit"
+          >
+            Edit
+          </Button>
+          <Button
+            className={classes["delete-task"]}
+            onClick={deleteTaskHandler}
+          >
+            Delete
+          </Button>
+        </div>
+      </form>
     </Card>
   );
 };
