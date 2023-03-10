@@ -1,10 +1,25 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer components {
+  form input {
+    @apply focus-visible:outline-none border border-slate-600 rounded-[10px] min-h-[40px];
+  }
+
+  .container {
+    @apply max-w-[1366px];
+  }
+}
+
 .App {
   text-align: center;
 }
 
 .container {
   padding: 0 10px;
-  width: 700px;
+  width: 100%;
+  max-width: 700px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -13,15 +28,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
 }
 
 .App-link {

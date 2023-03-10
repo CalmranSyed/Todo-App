@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./TodoItem.module.css";
@@ -8,19 +8,25 @@ const TodoItem = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [updatedTodo, setUpdatedTodo] = useState(props.title);
   const todoEditRef = useRef();
-
   // handler for edit button
   const editTodoHandler = () => {
-    if (editMode === false) {
-      setEditMode(true);
-      return;
-    }
-    setEditMode(false);
+    // if (editMode === false) {
+    //   setEditMode(true);
+    // } else {
+    //   setEditMode(false);
+    // }
+
+    const currentTaskID = props.id;
+    props.onEdit(currentTaskID);
+    setTimeout(() => {
+      todoEditRef.current.focus();
+    }, 50);
   };
 
   // handler for delete button
   const deleteTaskHandler = () => {
-    props.onDelete(props.id);
+    const id = props.id;
+    props.onDelete(id);
   };
 
   const todoTitleChangeHandler = (event) => {
@@ -34,9 +40,10 @@ const TodoItem = (props) => {
 
   let titleContent = <span>{updatedTodo}</span>;
 
-  if (editMode) {
+  if (props.edit) {
     titleContent = (
       <input
+        id="edit-field"
         className={classes["edit-input"]}
         type="text"
         value={updatedTodo}
@@ -56,7 +63,7 @@ const TodoItem = (props) => {
           <Button
             className={classes["edit-task"]}
             onClick={editTodoHandler}
-            disabled={editMode}
+            disabled={props.edit ? false : true}
             type="submit"
           >
             Edit
