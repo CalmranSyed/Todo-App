@@ -76,7 +76,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <header className="App-header bg-slate-800 py-6 text-center">
+      <header className="App-header bg-black py-6 text-center">
         <div className="container">
           <h3 className="font-bold text-3xl text-white">ToDo List</h3>
         </div>

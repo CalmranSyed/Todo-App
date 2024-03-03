@@ -1,6 +1,5 @@
-import { useState, React, useRef } from "react";
+import { useState, React } from "react";
 import TodoItem from "./TodoItem";
-import classes from "./TodoList.module.css";
 
 const TodoList = (props) => {
   const [editIndex, setEditIndex] = useState();
@@ -16,8 +15,8 @@ const TodoList = (props) => {
   };
 
   return (
-    <div className={classes["todo-list-wrap"]}>
-      <h3 className="text-xl font-bold text-center mb-3">Tasks</h3>
+    <div className="w-full max-w-5xl mx-auto">
+      <h3 className="text-xl font-bold text-center mb-3">Tasks remaining</h3>
       {props.todos.map((task, index) => (
         <TodoItem
           onDelete={props.onDeleteTodoTask}

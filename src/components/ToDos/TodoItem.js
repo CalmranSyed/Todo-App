@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
   // state for checking if task if being updated
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
   const [updatedTodo, setUpdatedTodo] = useState(props.title);
   const todoEditRef = useRef();
   // handler for edit button
@@ -18,9 +17,10 @@ const TodoItem = (props) => {
 
     const currentTaskID = props.id;
     props.onEdit(currentTaskID);
-    setTimeout(() => {
-      todoEditRef.current.focus();
-    }, 50);
+    // setTimeout(() => {
+    //   todoEditRef.current.focus();
+    // }, 50);
+    
   };
 
   // handler for delete button
@@ -44,7 +44,7 @@ const TodoItem = (props) => {
     titleContent = (
       <input
         id="edit-field"
-        className={classes["edit-input"]}
+        className="w-full"
         type="text"
         value={updatedTodo}
         onChange={todoTitleChangeHandler}
@@ -56,20 +56,19 @@ const TodoItem = (props) => {
   // ref for input field for updating task
 
   return (
-    <Card className={`${classes["todo-task"]}`}>
-      <form className={`${classes["edit-form"]}`} onSubmit={formSubmitHandler}>
-        <div className={classes["task-content"]}>{titleContent}</div>
-        <div className={classes["actions-wrap"]}>
+    <Card className="flex items-center justify-between">
+      <form className="flex items-center justify-between w-full gap-5" onSubmit={formSubmitHandler}>
+        <div className="w-[75%]">{titleContent}</div>
+        <div className="inline-flex items-center justify-center gap-5 basis-1/4 shrink-0 grow-0">
           <Button
-            className={classes["edit-task"]}
+            className="action-button"
             onClick={editTodoHandler}
-            disabled={props.edit ? false : true}
             type="submit"
           >
             Edit
           </Button>
           <Button
-            className={classes["delete-task"]}
+            className="action-button"
             onClick={deleteTaskHandler}
           >
             Delete

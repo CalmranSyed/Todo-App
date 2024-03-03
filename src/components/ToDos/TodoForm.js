@@ -1,11 +1,10 @@
 import React, { useState, useRef, Fragment } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import classes from "./TodoForm.module.css";
 
 const TodoForm = (props) => {
   const [todo, setTodo] = useState("");
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(null);
 
   const todoInputRef = useRef();
 
@@ -29,25 +28,25 @@ const TodoForm = (props) => {
     setTodo("");
   };
 
-  var message = <p className={classes["error-message"]}>Please add a task</p>;
+  var message = <p className="text-red-500 mt-2 text-left text-sm font-semibold">Please add a task</p>;
 
   return (
     <Fragment>
-      <Card className={classes["form-wrap"]}>
-        <form onSubmit={formSubmitHandler} className={classes["todo-form"]}>
+      <Card className="my-7 max-w-5xl mx-auto">
+        <p className="mb-3 text-sm font-bold">Keep track of your tasks effortlessly! Jot down everything here, and your to-dos will be ready for you next time. Add each task for smooth task management</p>
+        <form onSubmit={formSubmitHandler} className="flex gap-5">
           <input
+            className="basis-3/4 leading-7 text-base focus:outline-none"
             onChange={todoChangeHandler}
             type="text"
             placeholder="Enter a task"
             value={todo}
             ref={todoInputRef}
           />
-          <Button type="submit">Add Task</Button>
+          <Button type="submit" className="basis-1/4 button">Add Task</Button>
         </form>
+      {isValid === false && message}
       </Card>
-      {setIsValid === false && (
-        <p className={classes["error-message"]}>Please add a task</p>
-      )}
     </Fragment>
   );
 };
