@@ -38,27 +38,20 @@ const TodoItem = (props) => {
     props.onUpdate(updatedTodo, props.id);
   };
 
-  let titleContent = <span>{updatedTodo}</span>;
-
-  if (props.edit) {
-    titleContent = (
-      <input
-        id="edit-field"
-        className="w-full"
-        type="text"
-        value={updatedTodo}
-        onChange={todoTitleChangeHandler}
-        ref={todoEditRef}
-      />
-    );
-  }
-
-  // ref for input field for updating task
-
   return (
     <Card className="flex items-center justify-between">
       <form className="flex items-center justify-between w-full gap-5" onSubmit={formSubmitHandler}>
-        <div className="w-[75%]">{titleContent}</div>
+        <div className="w-[75%]">
+        <input
+          id="edit-field"
+          className="w-full disabled:border-transparent disabled:px-0 disabled:font-semibold"
+          type="text"
+          value={updatedTodo}
+          onChange={todoTitleChangeHandler}
+          ref={todoEditRef}
+          disabled={!props.edit}
+        />
+        </div>
         <div className="inline-flex items-center justify-center gap-5 basis-1/4 shrink-0 grow-0">
           <Button
             className="action-button"
