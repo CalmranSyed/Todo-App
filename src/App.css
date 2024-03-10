@@ -16,11 +16,19 @@
   }
 
   button, button[type="submit"] {
-    @apply px-6 py-3 font-semibold text-white bg-black rounded-md border-none hover:opacity-90 active:opacity-90;
+    @apply px-3 md:px-6 py-3 font-semibold text-white bg-black rounded-md border-none hover:opacity-90 active:opacity-90;
   }
 
   .action-button {
-    @apply flex-1
+    @apply flex flex-1 gap-2 justify-center text-white items-center;
+  }
+
+  .action-button-text {
+    @apply hidden md:block;
+  }
+
+  .action-button-icon {
+    @apply block md:hidden;
   }
 }
 

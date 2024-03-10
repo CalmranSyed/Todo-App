@@ -36,14 +36,17 @@ const TodoForm = (props) => {
         <p className="mb-3 text-sm font-bold">Keep track of your tasks effortlessly! Jot down everything here, and your to-dos will be ready for you next time. Add each task for smooth task management</p>
         <form onSubmit={formSubmitHandler} className="flex gap-5">
           <input
-            className="basis-3/4 leading-7 text-base focus:outline-none"
+            className="basis-5/6 md:basis-3/4 leading-7 text-base focus:outline-none"
             onChange={todoChangeHandler}
             type="text"
             placeholder="Enter a task"
             value={todo}
             ref={todoInputRef}
           />
-          <Button type="submit" className="basis-1/4 button">Add Task</Button>
+          <Button type="submit" className="basis-1/5 md:basis-1/4 button action-button">
+            <span className="action-button-text">Add Task</span>
+            <span className="action-button-icon">&#10133;</span>
+          </Button>
         </form>
       {isValid === false && message}
       </Card>
